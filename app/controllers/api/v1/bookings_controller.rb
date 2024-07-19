@@ -1,4 +1,7 @@
 class Api::V1::BookingsController < ApplicationController
+
+  before_action :authenticate , only: [:create]
+
   def index
     bookings = Booking.all
     render json: bookings.to_json(include: [:user, :trip])
@@ -9,7 +12,14 @@ class Api::V1::BookingsController < ApplicationController
     render json: booking.to_json(include: [:user, :trip])
   end
 
-  
+  def create
+    booking = Booking.new(booking_params)
+    if booking.save
+      render json: booking, status: 201
+    else
+      render json: { errors: booking.errors.full_messages }, status: 422
+    end
+  end
 
   private
 

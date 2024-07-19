@@ -2,7 +2,7 @@ class Api::V1::Trips::TripRoutesController < ApplicationController
   def index
     # get all routes for a single trip
     trip = Trip.find(params[:trip_id])
-    render json: trip.trip_routes
+    render json: trip.trip_routes.to_json(include: { route: {include: [:city1, :city2]} }), status: 200
   end
 
   def create
