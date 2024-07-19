@@ -15,8 +15,11 @@ class Api::V1::RoutesController < ApplicationController
 
   def update
     route = Route.find(params[:id])
-    route.update(route_params)
-    render json: route
+    if route.update(route_params)
+      render json: route
+    else
+      render json: { errors: route.errors.full_messages }, status: 422
+    end
   end
 
   def destroy
