@@ -1,5 +1,7 @@
 class Api::V1::CitiesController < ApplicationController
   
+  before_action :authenticate, only: [:index, :show, :create, :update, :destroy]
+
   def index
     cities = City.all
     render json: cities
