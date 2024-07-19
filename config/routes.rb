@@ -17,7 +17,11 @@ Rails.application.routes.draw do
       resources :trip_routes, only: [:destroy, :show], controller: 'trips/trip_routes'
       resources :cities, only: [:index, :create, :destroy, :update, :show]
       resources :routes, only: [:index, :create, :destroy, :update]
-      resources :trips, only: [:index, :create, :destroy, :update, :show]
+      resources :trips, only: [:index, :create, :destroy, :update, :show] do
+        collection do
+          get :next_trips # /api/v1/trips/next_trips
+        end
+      end
       resources :buses, only: [:index, :create, :destroy, :show]
       resources :bookings, only: [:index, :show, :create]
     end
