@@ -39,4 +39,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_19_025550) do
     t.string "password_digest"
   end
 
+  add_foreign_key "routes", "cities", column: "city1_id"
+  add_foreign_key "routes", "cities", column: "city2_id"
 end

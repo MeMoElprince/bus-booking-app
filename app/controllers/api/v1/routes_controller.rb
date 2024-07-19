@@ -7,7 +7,7 @@ class Api::V1::RoutesController < ApplicationController
   def create
     route = Route.new(route_params)
     if route.save
-      render json: route
+      render json: route, status: 201
     else
       render json: { errors: route.errors.full_messages }, status: 422
     end
