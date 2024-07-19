@@ -1,7 +1,7 @@
 class Api::V1::TripsController < ApplicationController
   def index
-    trips = Trip.all
-    render json: trips
+    trips = Trip.includes(:departure_city, :arrival_city).all
+    render json: trips.to_json(include: [:departure_city, :arrival_city])
   end
 
   def create

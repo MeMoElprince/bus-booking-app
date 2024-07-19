@@ -1,7 +1,7 @@
 class Api::V1::RoutesController < ApplicationController
   def index
     routes = Route.all
-    render json: routes
+    render json: routes.to_json(include: [:city1, :city2])
   end
 
   def create
