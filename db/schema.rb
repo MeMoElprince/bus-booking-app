@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_19_140349) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_19_150252) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,6 +44,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_19_140349) do
     t.index ["bus_id"], name: "index_seats_on_bus_id"
   end
 
+  create_table "trip_routes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "route_id", null: false
+    t.bigint "trip_id", null: false
+    t.index ["route_id"], name: "index_trip_routes_on_route_id"
+    t.index ["trip_id"], name: "index_trip_routes_on_trip_id"
+  end
+
   create_table "trips", force: :cascade do |t|
     t.time "departure_time"
     t.datetime "created_at", null: false
@@ -67,6 +76,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_19_140349) do
   add_foreign_key "routes", "cities", column: "city1_id"
   add_foreign_key "routes", "cities", column: "city2_id"
   add_foreign_key "seats", "buses"
+  add_foreign_key "trip_routes", "routes"
+  add_foreign_key "trip_routes", "trips"
   add_foreign_key "trips", "buses"
   add_foreign_key "trips", "cities", column: "arrival_city_id"
   add_foreign_key "trips", "cities", column: "departure_city_id"

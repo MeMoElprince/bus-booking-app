@@ -2,6 +2,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      namespace :trips do
+        # /api/v1/trips/:id/routes/:route_id/
+        get '/:trip_id/routes', to: 'trip_routes#index'
+        post '/:trip_id/routes/:route_id', to: 'trip_routes#create'
+        resources :trip_routes, only: [:update, :destroy, :show]
+      end
       resources :users, only: [] do
         collection do
           post :signup

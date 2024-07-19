@@ -5,7 +5,7 @@ class Route < ApplicationRecord
   validates :city1_id, presence: true
   validates :city2_id, presence: true
 
-
+  has_many :trip_routes
 
   belongs_to :city1, class_name: 'City'
   belongs_to :city2, class_name: 'City'
