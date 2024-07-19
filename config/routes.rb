@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         end
       end
       resources :cities, only: [:index, :create, :destroy, :update, :show]
+      resources :routes, only: [:index, :create, :destroy, :update]
     end
   end
 end
