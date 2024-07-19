@@ -38,7 +38,7 @@ class Api::V1::TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:departure_city_id, :arrival_city_id, :departure_time)
+    params.require(:trip).permit(:departure_city_id, :arrival_city_id, :departure_time, :bus_id)
   end
 
 
