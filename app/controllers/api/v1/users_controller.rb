@@ -7,7 +7,6 @@ module Api
       # generate token
       # return user and token
       
-      before_action :authenticate, only: [:index]
     
       def signup
         password = params[:password]
@@ -56,8 +55,8 @@ module Api
           render json: { errors: ["Invalid password"] }, status: 401
         end
       end
-    
-    
+      
+
       
 
     
