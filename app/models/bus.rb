@@ -3,6 +3,6 @@ class Bus < ApplicationRecord
 
   has_many :seats
 
-  belongs_to :trip
+  has_many :trips
 
 end

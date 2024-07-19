@@ -10,15 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_19_135540) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_19_140349) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "buses", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "trip_id", null: false
-    t.index ["trip_id"], name: "index_buses_on_trip_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -52,7 +50,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_19_135540) do
     t.datetime "updated_at", null: false
     t.bigint "departure_city_id"
     t.bigint "arrival_city_id"
+    t.bigint "bus_id", null: false
     t.index ["arrival_city_id"], name: "index_trips_on_arrival_city_id"
+    t.index ["bus_id"], name: "index_trips_on_bus_id"
     t.index ["departure_city_id"], name: "index_trips_on_departure_city_id"
   end
 
@@ -64,10 +64,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_19_135540) do
     t.string "password_digest"
   end
 
-  add_foreign_key "buses", "trips"
   add_foreign_key "routes", "cities", column: "city1_id"
   add_foreign_key "routes", "cities", column: "city2_id"
   add_foreign_key "seats", "buses"
+  add_foreign_key "trips", "buses"
   add_foreign_key "trips", "cities", column: "arrival_city_id"
   add_foreign_key "trips", "cities", column: "departure_city_id"
 end
