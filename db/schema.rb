@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_19_150252) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_19_163608) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.integer "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "trip_id", null: false
+    t.index ["trip_id"], name: "index_bookings_on_trip_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
 
   create_table "buses", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -73,6 +83,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_19_150252) do
     t.string "password_digest"
   end
 
+  add_foreign_key "bookings", "trips"
+  add_foreign_key "bookings", "users"
   add_foreign_key "routes", "cities", column: "city1_id"
   add_foreign_key "routes", "cities", column: "city2_id"
   add_foreign_key "seats", "buses"
