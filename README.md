@@ -39,7 +39,7 @@
 
 ### 1. Build the system
 
-> We create cities and each cuty is a station we then creates our routes using cities we define here
+> We create cities and each city is a station we then creates our routes using cities we define here
 * **URL**: `/api/v1/cites`
 * **Method**: `post`
 * **description**: creates a new city (station)
@@ -97,6 +97,18 @@
 * **URL**: `/api/v1/trips/next_trips`
 * **Method**: `get`
 * **description**: get all the trips that are available for the user to book
+  
+> We get all the trips that are available for the user to book from a specific city to another
+* **URL**: `/api/v1/trips/next_trips_for_route`
+* **Method**: `get`
+* **description**: get all the trips that are available for the user to book
+* **body**: 
+```json
+{
+  "city1_id": 1,
+  "city2_id": 2
+}
+```
   
 > User can book a trip by passing the trip_id, the number of seats he wants to book, the first station he wants to start from and the last station he wants to go to
 * **URL**: `/api/v1/bookings`
