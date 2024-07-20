@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :trips, only: [:index, :create, :destroy, :update, :show] do
         collection do
           get :next_trips # /api/v1/trips/next_trips
+          get :next_trips_for_route 
         end
       end
       resources :buses, only: [:index, :create, :destroy, :show]

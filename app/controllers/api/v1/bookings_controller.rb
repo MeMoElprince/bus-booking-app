@@ -34,9 +34,6 @@ class Api::V1::BookingsController < ApplicationController
       end
     end
     
-    puts "----------"
-    puts graph
-    puts "----------"
     if(valid_path_bfs(graph, data[:city1_id], data[:city2_id]) == false)
       render json: { errors: ["Invalid path"] }, status: 422
       return
